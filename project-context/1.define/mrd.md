@@ -16,6 +16,69 @@ This MRD defines the market and product opportunity for the capstone project **A
 ## Research Query Structure
 **Primary Focus**: Automated Employee Onboarding Flow for US mid-market technology companies, using AI-driven orchestration to reduce onboarding friction and shorten new-hire ramp time through three parallel workstreams: IT Provisioning, Compliance Checks, and Personalized Training Paths where all hires follow the same baseline path and the training agent determines specialization.
 
+## Structured MRD Sections
+
+### Problem Statement
+#### Current State
+- Mid-market US tech companies often run onboarding across disconnected tools (`email`, `spreadsheets`, `HR systems`, `ticketing`).
+- Critical workstreams (`IT Provisioning`, `Compliance Checks`, `Training`) are often sequential/manual.
+
+#### Impact
+- Delayed start readiness and slower ramp to productivity.
+- Low status visibility across HR, IT, managers, and new hires.
+- Repetitive coordination overhead and inconsistent execution quality.
+
+#### Desired Outcome
+- One orchestrated onboarding flow with three parallel tracks.
+- Clear ownership, SLAs, and escalation by track.
+- Measurable reduction in time-to-productivity.
+
+### Personas
+| Persona | Type | Primary Need | Success Signal |
+|---|---|---|---|
+| HR Operations Manager | Primary buyer/user | Control plane for ownership, SLAs, and escalations | Fewer manual follow-ups and fewer overdue tasks |
+| IT Administrator | Primary execution user | Predictable provisioning requests with complete inputs | Day 1 access readiness improves |
+| Hiring Manager | Primary stakeholder user | Confidence new hires are operational quickly | Faster milestone completion by day 7/day 30 |
+| New Hire | End user | Transparent onboarding journey with clear next steps | Lower confusion and higher completion rate |
+| People/Ops Leadership | Economic buyer | Measurable ramp-speed and process-efficiency gains | KPI improvement without high implementation cost |
+
+### Competitive Analysis
+#### Landscape Summary
+| Category | Examples | Strengths | Gaps for This Use Case |
+|---|---|---|---|
+| Enterprise HR suites | Workday, SAP SuccessFactors, Oracle HCM | Broad feature coverage | Heavy implementation and config overhead for mid-market |
+| Mid-market HR platforms | BambooHR, Rippling, HiBob | Strong core onboarding workflows | Limited adaptive orchestration depth in some products |
+| Generic workflow tools | Jira, Asana, Trello + email | Fast setup, flexible tasking | Not purpose-built for onboarding dependencies/SLAs |
+| Internal custom processes | Spreadsheets, scripts, templates | Low short-term cost | Fragile governance, low visibility, hard to scale |
+
+#### Opportunity Gap
+- Market gap is between heavy suites and lightweight checklist tools.
+- Positioning: **parallel orchestration + track accountability + agent-guided training specialization** with low-friction rollout.
+
+### Market Sizing
+| Layer | Scope | Signal |
+|---|---|---|
+| Adjacent market | HR software | ~$16.43B (2023) -> ~$36.62B (2030) |
+| Category market | Onboarding software | ~$1.7B-$1.9B (2024) -> ~$3.6B-$3.7B (2028-2030) |
+| Serviceable focus | US mid-market tech | Teams needing faster onboarding under time/cost constraints |
+| Capstone lens | Practical entry point | Workflow automation wedge, not full HR platform replacement |
+
+### Risks
+#### Risk Register
+| Risk | Description | Mitigation |
+|---|---|---|
+| Execution risk | Integration/workflow edge cases in IT and Compliance | Track state machines, SLA timers, deterministic retries |
+| Model/automation risk | Agent outputs need guardrails | Rule-based gates, fallback flows, human escalation |
+| Adoption risk | HR/manager pushback on added process | Simple dashboards, role-specific views, minimal required inputs |
+| Proof risk | Weak telemetry reduces KPI credibility | Instrument per-track events and baseline-vs-MVP reporting |
+| Scope risk | MVP over-expansion impacts timeline | Enforce strict scope gates and defer non-core integrations |
+
+### Assumptions
+- All employees follow one baseline onboarding path for IT and Compliance; only Training specialization differs.
+- MVP uses mock HRIS connector; live sandbox integrations are deferred.
+- KPI proof relies on controlled before/after proxy measurement rather than historical enterprise data.
+- Buyers prioritize implementation speed, reliability, and measurable outcomes over broad feature catalogs.
+
 ## Detailed Findings by Dimension
 
 ### 1. Market Analysis & Opportunity Assessment
@@ -37,6 +100,12 @@ This MRD defines the market and product opportunity for the capstone project **A
 - Differentiation should center on measurable onboarding outcomes (time-to-productivity, completion quality, manager accountability), not just workflow automation.
 - Product strategy should treat onboarding as a parallelized execution system where each process has independent SLAs and a shared readiness score.
 
+**Source Citations (selected)**
+- Grand View Research, 2024 (HR software market sizing and CAGR).
+- Strategic Market Research, 2024-2030 outlook (onboarding software growth range).
+- Gallup, workplace onboarding benchmark (12% strong-agreement indicator).
+- Sapient Insights, 2024-2025 HR systems survey (mid-market buyer priorities and adoption signals).
+
 ### 2. Technical Feasibility & Requirements Analysis
 **Key Insights**
 - CrewAI-style multi-agent orchestration is suitable for decomposing onboarding into specialized responsibilities (IT provisioning orchestration, compliance validation, personalized training path generation, and escalation routing).
@@ -54,6 +123,12 @@ This MRD defines the market and product opportunity for the capstone project **A
 - The project should explicitly include cost controls (token budgets, retry limits, queue backpressure) to align with low-cost constraints.
 - Architecture should enforce parallel-track orchestration with dependency gates only where needed (e.g., privileged system access dependent on compliance completion).
 
+**Source Citations (selected)**
+- Deloitte, 2025 HR technology trends (AI workflow adoption direction and enterprise constraints).
+- McKinsey HR Monitor, 2025 (operational AI maturity and scaling considerations).
+- Sapient Insights, 2024-2025 (integration reliability and scalability evaluation priorities).
+- HR.com + UKG, 2024 (SMB/mid-market HR decision criteria and implementation concerns).
+
 ### 3. User Experience & Workflow Analysis
 **Key Insights**
 - The onboarding journey is multi-actor: HR ops, hiring manager, IT admin, and new hire each need tailored views and nudges.
@@ -68,11 +143,18 @@ This MRD defines the market and product opportunity for the capstone project **A
 **Data Points**
 - Early attrition is concentrated in the first 45-90 days in many onboarding studies; poor onboarding quality strongly correlates with disengagement.
 - Organizations with structured onboarding practices report materially better preparedness and earlier productivity milestones.
+- Practical MVP benchmark frame: day 1 readiness >=90%, day 7 required completion >=85%, and median TTP-P improvement >=20% vs baseline (defined in this MRD measurement framework).
 
 **Implications**
 - UX should prioritize transparency and accountability over feature breadth.
 - The MVP should include explicit milestone tracking by day 1/day 7/day 30 and task completion visibility by track and owner.
 - The portal should expose per-track progress plus a unified "ready-for-productivity" indicator that updates as each parallel track advances.
+
+**Source Citations (selected)**
+- Gallup (onboarding quality baseline and engagement signal).
+- SHRM 2024-2025 trend summaries (retention and onboarding quality relationships).
+- EMP Trust 2024 onboarding benchmark compilation (early-stage onboarding completion patterns).
+- G2 2024 onboarding statistics summary (task clarity and completion behavior themes).
 
 ### 4. Production & Operations Requirements
 **Key Insights**
@@ -90,21 +172,48 @@ This MRD defines the market and product opportunity for the capstone project **A
 - Define SLO-like targets for critical workflows (notification delivery, task state consistency, and chatbot response reliability).
 - Define track-specific operational KPIs: provisioning lead time, compliance completion rate before start date, and training path completion by day 30.
 
+**Cost Structure (Capstone Planning Baseline)**
+- Development cost model: lean team, 8-12 week delivery window, prioritize workflow core over integration breadth.
+- Runtime cost buckets: compute (API + workers), managed database, observability stack, LLM/API usage, email/chat delivery.
+- Cost-control guardrails: per-workflow token budget, retry caps, queue backpressure thresholds, and alerting on budget burn-rate.
+- Decision policy: defer connectors or non-core automations if projected monthly run cost exceeds capstone budget threshold.
+
+**Source Citations (selected)**
+- Deloitte 2025 trends (cloud-first HR operations and implementation-speed constraints).
+- McKinsey HR Monitor 2025 (operational scaling and cost/ROI pressure in HR tech).
+- Sapient Insights 2024-2025 survey (buyer concerns around TCO and implementation risk).
+
 ### 5. Innovation & Differentiation Analysis
 **Key Insights**
 - Competitive parity features (checklists, reminders, e-sign links) are no longer enough; differentiation requires adaptive guidance and proactive orchestration.
 - Agentic patterns can create novelty if bounded to practical outcomes: next-best-action suggestions, bottleneck detection, and proactive escalation prompts.
 - Mid-market buyers respond to tools that improve manager execution without requiring heavy change management.
 - Differentiation strengthens when AI coordinates the three tracks in parallel and recommends interventions based on cross-track dependencies and risk of delayed productivity.
+- Patent and IP risk should be managed through implementation-led differentiation (workflow composition, integration ergonomics, explainability UX) instead of model novelty claims.
 
 **Data Points**
 - 2025 HR trend reports highlight continued investment in AI-enabled workflows and rising expectation of intelligent automation in people operations tools.
 - Market reports consistently identify analytics, personalization, and integration interoperability as key purchasing drivers.
 
+**Partnership Opportunities**
+- HRIS ecosystem partners (sandbox-first): faster pilot activation with profile/start-date sync.
+- Identity/access and ITSM partners: reduce day 1 readiness risk in provisioning workflows.
+- LMS/content partners: broaden specialization modules while preserving baseline onboarding consistency.
+
+**Monetization Strategies (Post-Capstone Directional)**
+- Core subscription by active onboarding seats per month.
+- Tiered add-ons for advanced analytics, escalation intelligence, and enterprise connectors.
+- Services-assisted onboarding package for initial workflow configuration and KPI baseline setup.
+
 **Implications**
 - Positioning should be "faster ramp to productivity through guided, accountable onboarding orchestration."
 - The capstone should showcase explainable AI decisions and transparent audit logs to improve trust.
 - Product narrative should explicitly highlight "parallel onboarding orchestration" as the core value, not merely task digitization.
+
+**Source Citations (selected)**
+- Deloitte 2025 HR technology marketplace trends (AI-enabled workflow differentiation signals).
+- McKinsey HR Monitor 2025 (prioritization of measurable productivity outcomes).
+- Market Research Future + Strategic Market Research (category growth trajectory supporting monetization potential).
 
 ## Executive Summary
 The US mid-market technology segment presents a credible market entry point for an automated onboarding solution. Market demand is supported by sustained HR software growth, ongoing onboarding pain points, and clear business consequences of weak early employee experiences. Existing solutions often over-index on static workflow management while under-delivering on adaptive coordination and measurable time-to-productivity outcomes.
@@ -125,8 +234,9 @@ The recommended strategy is to prioritize a measurable productivity-ramp framewo
   - Target US mid-market tech firms with distributed teams and growing hiring volume.
   - Message: "Reduce new-hire ramp time with accountable, AI-guided onboarding orchestration."
 - **Resource Requirements**
-  - Lean build profile: 1 product owner + 1-2 engineers can deliver MVP in capstone timeline.
-  - Priority spend: authentication, workflow engine, notifications, and telemetry before advanced integrations.
+  - Delivery profile (recommended): 1 product manager, 1 architect (part-time), 1 backend engineer, 1 frontend engineer, 1 integration/QA shared role for 8-12 weeks.
+  - Budget control model: allocate effort/cost first to authentication, workflow engine, notifications, and telemetry; defer enterprise connectors and advanced analytics unless P0 KPIs are met.
+  - Capacity trigger: if velocity drops below P0 milestone plan for two consecutive sprints, freeze non-P0 scope immediately.
 
 ## Risk Assessment Matrix
 - **High Risk**
@@ -176,6 +286,13 @@ The recommended strategy is to prioritize a measurable productivity-ramp framewo
 14. EMP Trust - Employee Onboarding Statistics 2024 (compiled benchmarks): https://www.emptrust.com/infographics/employee-onboarding-statistics-2024/
 15. G2 - Onboarding Statistics (2024): https://www.g2.com/articles/onboarding-statistics
 
+## Market Size Reconciliation Logic
+- Observed variance: onboarding category estimates differ by publisher methodology, segment definitions, and forecast windows.
+- Planning approach: use a conservative base range for financial narratives and an upper range only for opportunity context.
+- Base planning band: 2024 size at $1.7B-$1.9B, growth toward ~$3.6B by late-decade horizon.
+- Upside context band: ranges that include ~$3.7B outcomes are treated as upside, not baseline planning assumptions.
+- Decision rule: roadmap commitments must be justified by KPI performance (TTP-P, day 1 readiness, day 7 completion), not TAM optimism.
+
 ## Assumptions
 - This capstone prioritizes **demonstrable MVP outcomes** over enterprise-complete integration coverage.
 - Market sizing figures vary by publisher methodology; this MRD uses directional triangulation rather than a single-source absolute estimate.
@@ -187,20 +304,22 @@ The recommended strategy is to prioritize a measurable productivity-ramp framewo
 - HRIS integration approach for MVP is fixed to a mock connector; live sandbox integration is explicitly deferred to post-MVP.
 
 ## Baseline Metric Framework (Resolved)
-- **Primary KPI**: Time-to-Productivity Proxy (TTP-P) measured as elapsed time from onboarding start to completion of required milestones across IT, Compliance, and Training.
-- **Baseline approach**: Use controlled benchmark runs with two modes:
-  - `Baseline`: sequential/manual coordination assumptions.
-  - `MVP`: parallel orchestration with agent-driven training specialization.
-- **Required comparison metrics**:
-  - Median TTP-P (hours/days)
-  - Day 1 readiness rate (%)
-  - Day 7 completion rate (%)
-  - SLA breach rate by track (%)
-  - Manual intervention count per hire
-- **Success target for capstone validation**:
-  - >=20% reduction in median TTP-P vs baseline mode
-  - >=90% Day 1 IT+Compliance readiness
-  - >=85% Day 7 overall onboarding completion
+#### KPI Definition
+- **Primary KPI**: `Time-to-Productivity Proxy (TTP-P)` = elapsed time from onboarding start to completion of required milestones across `IT`, `Compliance`, and `Training`.
+
+#### Measurement Design
+- Compare two controlled run modes:
+  - `Baseline`: sequential/manual coordination assumptions
+  - `MVP`: parallel orchestration with agent-driven training specialization
+
+#### Comparison Metrics and Targets
+| Metric | Definition | Target |
+|---|---|---|
+| Median TTP-P | Median elapsed onboarding time | >=20% reduction vs baseline |
+| Day 1 readiness rate | % hires with IT + Compliance minimum complete by day 1 | >=90% |
+| Day 7 completion rate | % hires completing required onboarding by day 7 | >=85% |
+| SLA breach rate by track | % tasks breaching due-date SLA per track | Downward trend vs baseline |
+| Manual interventions per hire | Count of human overrides/escalations | Downward trend vs baseline |
 
 ## Open Questions
 - None at this stage.
@@ -214,6 +333,7 @@ The recommended strategy is to prioritize a measurable productivity-ramp framewo
 - **Action Name**: Resolved metric-baseline question with a capstone KPI framework and success targets
 - **Action Name**: Finalized MVP integration strategy to mock HRIS connector (sandbox deferred)
 - **Action Name**: Closed compliance narrative question (kept out of scope beyond basic best practices)
+- **Action Name**: Completed post-review quality remediation (citations by dimension, innovation coverage, cost structure, and market-size reconciliation)
 - **Output Path**: `project-context/1.define/mrd.md`
 - **Template Basis**: `.cursor/templates/mr-template.md`
 - **Scope Inputs Used**: US market, mid-market segment, tech industry, email+portal+chat channels, time/cost/innovation constraints, time-to-productivity KPI, and three parallel onboarding process tracks
