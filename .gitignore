@@ -6,7 +6,8 @@
 ._*
 
 # Custom folder icons
-Icon
+Icon
+
 
 # Volume root files
 .DocumentRevisions-V100
@@ -16,3 +17,24 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+### React/Vite (frontend)
+# Dependencies
+frontend/node_modules/
+
+# Build outputs and caches
+frontend/dist/
+frontend/coverage/
+frontend/.vite/
+frontend/*.tsbuildinfo
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# Local environment overrides
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
