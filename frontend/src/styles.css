@@ -213,6 +213,12 @@ button:not(:disabled):hover {
   background: rgba(255, 255, 255, 0.9);
 }
 
+.result-timestamp {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(31, 36, 48, 0.65);
+}
+
 .history-panel {
   padding-bottom: 1.3rem;
 }

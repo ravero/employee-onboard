@@ -84,3 +84,4 @@ Behavior:
 ## Change Notes
 - 2026-05-16 v0.1: Initial functional spec for frontend MVP flow.
 - 2026-05-17 v0.2: Spec Sync Checklist Done.
+- 2026-05-17 v0.3: Spec-to-impl pass — Results panel now renders completion timestamp via `activeCompletedAt` state; gap vs spec closed.

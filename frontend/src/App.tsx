@@ -9,6 +9,7 @@ function App(): JSX.Element {
   const [context, setContext] = useState("");
   const [activeRunId, setActiveRunId] = useState<string | null>(null);
   const [activeSummary, setActiveSummary] = useState<string>("");
+  const [activeCompletedAt, setActiveCompletedAt] = useState<string>("");
   const [history, setHistory] = useState<RunRecord[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string>(() => new Date().toISOString());
@@ -60,6 +61,7 @@ function App(): JSX.Element {
           const completedAt = new Date().toISOString();
 
           setActiveSummary(summary);
+          setActiveCompletedAt(completedAt);
           setHistory((current) => [
             {
               runId,
@@ -85,6 +87,7 @@ function App(): JSX.Element {
     setWorkflowState((current) => transitionWorkflow(current, "RESET"));
     setActiveRunId(null);
     setActiveSummary("");
+    setActiveCompletedAt("");
     setErrorMessage("");
     markUpdated();
   }
@@ -156,6 +159,10 @@ function App(): JSX.Element {
               <strong>Run ID:</strong> {activeRunId}
             </p>
             <p>{activeSummary}</p>
+            <p className="result-timestamp">
+              <strong>Completed:</strong>{" "}
+              {new Date(activeCompletedAt).toLocaleString()}
+            </p>
             <button type="button" onClick={handleReset}>
               Restart
             </button>
